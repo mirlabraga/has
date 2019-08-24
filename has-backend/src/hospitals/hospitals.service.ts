@@ -33,9 +33,4 @@ export class HospitalsService {
     })
     return hospitals;
   }
-
-  public async create(hospital: Hospital): Promise<Hospital> {
-    return null;
-  }
-
 }
