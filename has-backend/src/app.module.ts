@@ -9,10 +9,27 @@ import { IllnessesService } from './illnesses/illnesses.service';
 import { PainService } from './pain/pain.service';
 import { PainController } from './pain/pain.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PatientService } from './patient/patient.service';
+import { PatientsSchema } from './schemas/patients.schemas';
+import { PatientController } from './patient/patient.controller';
+
+const mongodbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/has';
 
 @Module({
-  imports: [HttpModule, ConfigModule, MongooseModule.forRoot('mongodb://localhost/nest')],
-  controllers: [AppController, HospitalsController, IllnessesController, PainController],
-  providers: [AppService, HospitalsService, IllnessesService, PainService],
+  imports: [
+    HttpModule,
+    ConfigModule,
+    MongooseModule.forRoot(mongodbLocation, {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+    }),
+    MongooseModule.forFeature([
+      {
+          name: 'Patients',
+          schema: PatientsSchema,
+      }
+  ])],
+  controllers: [AppController, HospitalsController, IllnessesController, PainController, PatientController],
+  providers: [AppService, HospitalsService, IllnessesService, PainService, PatientService],
 })
 export class AppModule {}
