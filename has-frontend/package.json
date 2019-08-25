@@ -41,5 +41,4 @@
     "webpack-cli": "^3.3.7"
   },
   "proxy": "http://localhost:3000"
-
 }

@@ -1,4 +1,4 @@
-import { Controller, HttpService, Req, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { HospitalsService } from './hospitals.service';
 
 const URL_SCOPE_VERSION: string = '/api/v1';
