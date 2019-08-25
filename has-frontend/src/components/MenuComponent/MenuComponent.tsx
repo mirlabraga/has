@@ -66,12 +66,10 @@ export default function MenuComponent() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {['All information', 'Emercency'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+        <ListItem button>
+              <ListItemIcon><InboxIcon/></ListItemIcon>
+              <ListItemText primary='Emercency'/>
             </ListItem>
-          ))}
         </List>
         <Divider />
         <List>
@@ -86,9 +84,10 @@ export default function MenuComponent() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-          <TableInfomationComponent/>
+            <TableInfomationComponent/>
         </Typography>
         <Typography paragraph>
+          <IllnessComponent/>
         </Typography>
       </main>
     </div>
