@@ -37,3 +37,6 @@ lerna-debug.log*
 
 /has-backend/dist
 /has-backend/node_modules
+
+/has-frontend/dist
+/has-frontend/node_modules
