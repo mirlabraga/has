@@ -7,6 +7,15 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { HospitalService } from '../../services/HospitalService';
+import { Hospital } from '../../services/Hospital';
+
+interface HospitalExtendedField {
+  name: string;
+  patientCount: number;
+  levelOfPain: number;
+  averageProcessTime: number;
+  waitingTime: number;
+}
 
 class TableInfomationComponent extends React.Component<any, any> {
 
@@ -16,30 +25,41 @@ class TableInfomationComponent extends React.Component<any, any> {
     super(props);
     this.state = {
       rows: [],
-      useStyles: makeStyles(theme => ({
-        root: {
-          width: '100%',
-          marginTop: theme.spacing(3),
-          overflowX: 'auto',
-        },
-        table: {
-          minWidth: 650,
-        },
-      }))
+      useStyles: {}
 
     };
-
     this.hospitalsService = new HospitalService();
-    this.getInfoHospitals();
   }
 
-  private getInfoHospitals() {
-    fetch('/api/v1/hospitals/waitingtimes')
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({ rows: data })
-      })
-      .catch(console.log)
+  async componentDidMount() {
+    this.loadHospitals();
+    this.loadStyle();
+  }
+
+  private async loadHospitals() {
+    const hospitals: Hospital[] = await this.hospitalsService.getHospitals();
+    let hospitalExtendedField: any[] = [];
+    hospitals.forEach(hospital => {
+      hospital.waitingList.forEach (waitingList => {
+        hospitalExtendedField.push([waitingList.levelOfPain, hospital.name,
+          waitingList.averageProcessTime, waitingList.patientCount, waitingList.waitingTime]);
+      });
+    });
+    this.setState({rows: hospitalExtendedField})
+  }
+
+  private async loadStyle() {
+    const style = makeStyles(theme => ({
+      root: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        overflowX: 'auto',
+      },
+      table: {
+        minWidth: 650,
+      },
+    }))
+    this.setState({useStyles: style})
   }
 
   public render() {
@@ -60,12 +80,12 @@ class TableInfomationComponent extends React.Component<any, any> {
             {this.state.rows.map((row: any) => (
               <TableRow key={row.name}>
                 <TableCell component="th" scope="row">
-                  1
+                {row[0]}
                 </TableCell>
-                <TableCell align="right">{row.name}</TableCell>
-                <TableCell align="right">1</TableCell>
-                <TableCell align="right">2</TableCell>
-                <TableCell align="right">2</TableCell>
+                <TableCell align="right">{row[1]}</TableCell>
+                <TableCell align="right">{row[2]}</TableCell>
+                <TableCell align="right">{row[3]}</TableCell>
+                <TableCell align="right">{row[4]}</TableCell>
               </TableRow>
             ))}
           </TableBody>
