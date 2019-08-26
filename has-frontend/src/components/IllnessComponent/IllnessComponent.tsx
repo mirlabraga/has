@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ListOfIllnessComponent from '../ListOfIllnessComponent';
 import ListOfPainComponent from '../ListOfPainComponent';
+import ListOfHospitalsComponent from '../ListOfHospitalsComponent';
 
 class IllnessComponent extends React.Component<any, any>  {
 
@@ -133,6 +134,8 @@ class IllnessComponent extends React.Component<any, any>  {
       button = <ListOfIllnessComponent />
     } else if (this.state.activeStep == 1) {
       button = <ListOfPainComponent/>;
+    } else if (this.state.activeStep == 2) {
+      button = <ListOfHospitalsComponent/>
     }
 
     return (

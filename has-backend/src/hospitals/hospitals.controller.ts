@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { HospitalsService } from './hospitals.service';
 
 const URL_SCOPE_VERSION: string = '/api/v1';
@@ -17,5 +17,10 @@ export class HospitalsController {
   @Get('waitingtimes')
   async calculateWaitingTimes() {
     return this.hospitalsService.calculateWaitingTimes();
+  }
+
+  @Get('waitingtimes/pain=:pain')
+  async calculateWaitingTimesByPain(@Param('pain') pain) {
+    return this.hospitalsService.calculateWaitingTimesByPain(pain);
   }
 }
