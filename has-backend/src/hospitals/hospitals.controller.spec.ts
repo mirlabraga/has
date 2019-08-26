@@ -4,7 +4,6 @@ import { HospitalsService } from './hospitals.service';
 import { HttpModule, INestApplication } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { Hospital } from './hospitals';
-import { request } from 'https';
 
 describe('Hospitals Controller', () => {
   let controller: HospitalsController;
