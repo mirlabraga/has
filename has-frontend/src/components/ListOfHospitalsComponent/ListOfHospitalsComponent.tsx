@@ -63,7 +63,7 @@ class ListOfHospitalsComponent extends React.Component<PropTypes, any>  {
       return (<>
         <Button variant="contained" color="primary" size="large"
           className={this.state.classes.button}>
-          {hospital.name} - {hospital.waitingList[0].waitingTime}
+          {hospital.name} - Wait time: {hospital.waitingList[0].waitingTime} min
           <Icon className={this.state.classes.rightIcon}></Icon>
         </Button><br /></>)
     })

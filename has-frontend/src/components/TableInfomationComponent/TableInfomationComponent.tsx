@@ -71,7 +71,7 @@ class TableInfomationComponent extends React.Component<any, any> {
             <TableRow>
               <TableCell>Level of pain</TableCell>
               <TableCell align="right">Hospital</TableCell>
-              <TableCell align="right">Avg process time</TableCell>
+              <TableCell align="right">Avg process time (min)</TableCell>
               <TableCell align="right">Patients at waiting list</TableCell>
               <TableCell align="right">Waiting time</TableCell>
             </TableRow>
