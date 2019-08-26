@@ -27,6 +27,7 @@ class IllnessComponent extends React.Component<any, any>  {
     this.handleReset = this.handleReset.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
     this.isLastStep = this.isLastStep.bind(this);
+    this.setSelectedPain = this.setSelectedPain.bind(this);
 
 
     // const [activeStep, setActiveStep] = React.useState(0);
@@ -72,11 +73,11 @@ class IllnessComponent extends React.Component<any, any>  {
   getStepContent(step: any) {
     switch (step) {
       case 0:
-        return 'Step 1: Select campaign settings...';
+        return 'Step 1: Select an illness';
       case 1:
-        return 'Step 2: What is an ad group anyways?';
+        return 'Step 2: What is a severity level?';
       case 2:
-        return 'Step 3: This is the bit I really care about!';
+        return 'Step 3: Our suggested Hospitals!';
       default:
         return 'Unknown step';
     }
@@ -127,18 +128,23 @@ class IllnessComponent extends React.Component<any, any>  {
     this.handleNext();
   }
 
+  setSelectedPain(pain: number) {
+    this.setState({selectPains : pain})
+  }
+
   public render() {
     //{this.getStepContent(this.state.activeStep)}
     let button;
     if (this.state.activeStep == 0) {
       button = <ListOfIllnessComponent />
     } else if (this.state.activeStep == 1) {
-      button = <ListOfPainComponent/>;
+      button = <ListOfPainComponent onChangePain={this.setSelectedPain} />;
     } else if (this.state.activeStep == 2) {
-      button = <ListOfHospitalsComponent/>
+      button = <ListOfHospitalsComponent levelOfPain={this.state.selectPains}/>
     }
 
     return (
+      <p>
       <div className={this.state.useStyles.root}>
         <Stepper nonLinear activeStep={this.state.activeStep}>
           {this.getSteps().map((label, index) => (
@@ -168,7 +174,7 @@ class IllnessComponent extends React.Component<any, any>  {
                     </Typography>
                   </main>
                 </Typography>
-                <div>
+                {/*<div>
                   <Button disabled={this.state.activeStep === 0} onClick={this.handleBack} className={this.state.useStyles.button}>
                     Back
                 </Button>
@@ -190,11 +196,12 @@ class IllnessComponent extends React.Component<any, any>  {
                         {this.completedSteps() === this.totalSteps() - 1 ? 'Finish' : 'Complete Step'}
                       </Button>
                     )}
-                </div>
+                    </div>*/}
               </div>
             )}
         </div>
       </div>
+      </p>
     );
   }
 }

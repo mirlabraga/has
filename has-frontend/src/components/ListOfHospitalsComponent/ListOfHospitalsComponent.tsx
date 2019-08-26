@@ -4,17 +4,22 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HospitalService } from '../../services/HospitalService';
 import { Hospital } from '../../services/Hospital';
 
-class ListOfHospitalsComponent extends React.Component<any, any>  {
+export interface PropTypes {
+  levelOfPain: number
+}
+
+class ListOfHospitalsComponent extends React.Component<PropTypes, any>  {
 
   private hospitalsService: HospitalService;
 
-  constructor(props: any) {
+  constructor(props: PropTypes) {
     super(props)
     this.state = {
       classes: {},
       hospitals:[]
     };
     this.hospitalsService = new HospitalService();
+    console.log(this.props.levelOfPain);
   }
 
   async componentDidMount() {
@@ -23,7 +28,8 @@ class ListOfHospitalsComponent extends React.Component<any, any>  {
   }
 
   private async loadHospitals() {
-    let hospitals: Hospital[] = await this.hospitalsService.getHospitalsByPain(2) ;
+    console.log(this.props.levelOfPain);
+    let hospitals: Hospital[] = await this.hospitalsService.getHospitalsByPain(this.props.levelOfPain) ;
     this.setState({ hospitals: hospitals })
   }
 
@@ -57,15 +63,17 @@ class ListOfHospitalsComponent extends React.Component<any, any>  {
       return (<>
         <Button variant="contained" color="primary" size="large"
           className={this.state.classes.button}>
-          {hospital.name}
+          {hospital.name} - {hospital.waitingList[0].waitingTime}
           <Icon className={this.state.classes.rightIcon}></Icon>
         </Button><br /></>)
     })
 
     return (
-      <div>
-        {hospitalComponent}
-      </div>
+      <p>
+        <div>
+            {hospitalComponent}
+        </div>
+      </p>
     );
   }
 }

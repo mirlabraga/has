@@ -45,7 +45,7 @@ export class HospitalsService {
               patientCount: waitingListCurrent.patientCount,
               levelOfPain: waitingListCurrent.levelOfPain,
               averageProcessTime: waitingListCurrent.averageProcessTime,
-              waitingTime: waitingListCurrent.waitingTime,
+              waitingTime: waitingListCurrent.patientCount * waitingListCurrent.averageProcessTime,
             }
           ]});
         }

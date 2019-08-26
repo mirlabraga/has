@@ -4,11 +4,15 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { PainsService } from '../../services/PainService';
 
-class ListOfPainComponent extends React.Component<any, any>  {
+export interface PropTypes {
+  onChangePain: (pain: number) => void
+}
+
+class ListOfPainComponent extends React.Component<PropTypes, any>  {
 
   private painsService: PainsService;
 
-  constructor(props: any) {
+  constructor(props: PropTypes) {
     super(props)
     this.state = {
       classes: {},
@@ -51,14 +55,19 @@ class ListOfPainComponent extends React.Component<any, any>  {
     this.setState({ classes: useStyles })
   }
 
-  selectPains(pain: Number) {
-    this.setState({ selectPains: pain });
+  public async selectPains(pain: number) {
+    try {
+      this.setState({ selectPains: pain });
+      this.props.onChangePain(pain);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   public render() {
 
     let painComponent;
-    painComponent = this.state.pains.map((pain: Number) => {
+    painComponent = this.state.pains.map((pain: number) => {
       return (<>
         <Button variant="contained" color="primary" onClick={() => this.selectPains(pain)} size="large"
           className={this.state.classes.button}>
@@ -68,17 +77,19 @@ class ListOfPainComponent extends React.Component<any, any>  {
     })
 
     let painSelectComponent;
-    if (this.state.selectPains) {
+    if (this.state.selectPains || this.state.selectPains == 0) {
       painSelectComponent = <SnackbarContent className={this.state.classes.snackbar} message={`Level of Pain Select: ` + this.state.selectPains} />
     } else {
       painSelectComponent = <></>;
     }
 
     return (
-      <div>
-        {painSelectComponent}
-        {painComponent}
-      </div>
+      <p>
+        <div>
+          {painSelectComponent}
+          {painComponent}
+        </div>
+      </p>
     );
   }
 }

@@ -76,10 +76,12 @@ class ListOfIllnessComponent extends React.Component<any, any>  {
     }
 
     return (
-      <div>
-        {illnessSelectComponent}
-        {illnessComponent}
-      </div>
+      <p>
+        <div>
+          {illnessSelectComponent}
+          {illnessComponent}
+        </div>
+      </p>
     );
   }
 }
