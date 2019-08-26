@@ -84,10 +84,10 @@ export default function MenuComponent() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-            <TableInfomationComponent/>
+          <IllnessComponent/>
         </Typography>
         <Typography paragraph>
-          <IllnessComponent/>
+            <TableInfomationComponent/>
         </Typography>
       </main>
     </div>
