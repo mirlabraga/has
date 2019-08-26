@@ -8,4 +8,3 @@ describe('<ListOfIllnessComponent />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
-  
