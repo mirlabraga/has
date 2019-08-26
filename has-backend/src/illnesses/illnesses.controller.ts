@@ -1,6 +1,5 @@
-import { Controller, HttpService, Get, Req } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { IllnessesService } from './illnesses.service';
-import { Request } from 'express';
 
 const URL_SCOPE_VERSION: string = '/api/v1';
 
@@ -11,7 +10,7 @@ export class IllnessesController {
   }
 
   @Get()
-  async getIllnesses(@Req() request: Request) {
+  async getIllnesses() {
     return this.illnessesService.getIllnesses();
   }
 }
