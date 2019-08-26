@@ -1,5 +1,5 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { Hospital } from './hospitals';
+import { Hospital, WaitingList } from './hospitals';
 import { ConfigService } from '../config/config.service';
 
 @Injectable()
@@ -32,5 +32,25 @@ export class HospitalsService {
       })
     })
     return hospitals;
+  }
+
+  public async calculateWaitingTimesByPain(pain: number): Promise<Hospital[]> {
+    let hospitals: Hospital[] = await this.getHospitals();
+    let newHospitals: Hospital[] = []
+    hospitals.forEach(hospital => {
+      hospital.waitingList.forEach( waitingListCurrent => {
+        if (waitingListCurrent.levelOfPain == pain) {
+          newHospitals.push({...hospital, waitingList: [
+            {
+              patientCount: waitingListCurrent.patientCount,
+              levelOfPain: waitingListCurrent.levelOfPain,
+              averageProcessTime: waitingListCurrent.averageProcessTime,
+              waitingTime: waitingListCurrent.waitingTime,
+            }
+          ]});
+        }
+      })
+    })
+    return newHospitals;
   }
 }
