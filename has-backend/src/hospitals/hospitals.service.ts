@@ -1,5 +1,5 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { Hospital, WaitingList } from './hospitals';
+import { Hospital } from './hospitals';
 import { ConfigService } from '../config/config.service';
 
 @Injectable()
