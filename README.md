@@ -12,11 +12,12 @@ This application have the goal:
 ## Features for implematations
 
  ● Fix layouts of user's screens
- ● Add erros's message
+ ● Add erros's messages
  ● Add Table Paginations on List of Hospitals
- ● Fix tests
+ ● Add more tests
  ● Created generic component of the List (ListOfHospitalsComponent,
  ListOfPainComponent, ListOfIllnessComponent)
+ ● Check name's patterns (Classes, functions for exemplo)
 
 ## This repo has 2 applications:
 
