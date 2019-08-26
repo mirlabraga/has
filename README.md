@@ -9,6 +9,14 @@ This application have the goal:
  ● Store new Patient information in your selected database
  ● For the UI you can use the screens provided below for inspiration
 
+## Features for implematations
+
+ ● Fix layouts of user's screens
+ ● Add erros's message
+ ● Add Table Paginations on List of Hospitals
+ ● Fix tests
+ ● Created generic component of the List (ListOfHospitalsComponent,
+ ListOfPainComponent, ListOfIllnessComponent)
 
 ## This repo has 2 applications:
 
@@ -24,11 +32,7 @@ This application have the goal:
 
 - mongodb >= v4
 
-
-
 ## Installation
-
-
 
 ```bash
 
@@ -36,10 +40,7 @@ $ npm install
 
 ```
 
-
-
 ## Environment variables for development
-
 
 
 | Variable name | Usage |
@@ -93,4 +94,62 @@ $ npm run test:e2e
 
 $ npm run test:cov
 
+```
+
+## API
+
+New Patient
+POST /api/v1/patient
+```json
+{
+	"name": "New Patient",
+	"levelOfPain": 1
+}
+```
+
+Hospitals by waiting list
+GET api/v1/hospitals/waitingtimes/pain=${pain}
+```json
+[
+	[
+		{
+			"id": 1,
+			"name": "St Vincent's Hospital",
+			"waitingList": [
+			{
+				"patientCount": 1,
+				"levelOfPain": ${pain},
+				"averageProcessTime": 15
+			}
+		]
+	}
+]
+```
+
+
+List of Pains
+GET api/v1/pains
+```json
+[
+	0,
+
+	1,
+
+	2,
+
+	3,
+
+	4
+]
+```
+
+List of Illnesses
+GET api/v1/illnesses
+```json
+[
+	{
+		"id": 1,
+		"name": "Mortal Cold"
+	},
+]
 ```
